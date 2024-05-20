@@ -16,15 +16,17 @@ function getData() {
 
   let response = new Promise(resolve => {
     let request = new XMLHttpRequest()
+    
     request.open("GET", requestUrl, true)
     request.responseType = "json"
-    request.onload = () => {
-      resolve(request.response)
-    }
+    
+    request.onload = () => resolve(request.response)
+    
     request.onerror = () => {
       resolve(undefined)
       console.error("Error during XMLHttpRequest")
     }
+    
     request.send()
   })
 
@@ -125,9 +127,8 @@ function startFiltering(data, callback) {
 
     // job.children[2] is job__title-container
     let status = parseJob(job.children[2], data.text);
-    if (status == data.direction) {
+    if (status == data.direction)
       callback(job);
-    }
 
   }
 
@@ -139,12 +140,12 @@ function startFiltering(data, callback) {
 // Parses the elements and returns a boolean
 function parseJob(element, clickedItemText) {
   let status = false;
-  for (let title of element.children) {
+  for (let title of element.children)
     if (title.textContent == clickedItemText) {
       status = true;
       return status;
     }
-  }
+  
   return status;
 }
 
@@ -170,9 +171,8 @@ function addFilterItems(element, clickedItemText) {
   // if the clicked element exists in filter area, stop function
   for (let items of filterItemsContainer.children) {
 
-    if (items.textContent == clickedItemText) {
+    if (items.textContent == clickedItemText)
       return;
-    }
 
   }
   
@@ -199,9 +199,8 @@ function insertRemoveButton(element, clickedItemText) {
 function clickRemoveButton(removeButton, clickedItemText) {
   removeButton.addEventListener("click", () => {
 
-    for (let job of appearJob) {
+    for (let job of appearJob)
       hideItem(job);
-    }
 
     deleteFilterElement(clickedItemText);
 
@@ -214,11 +213,9 @@ function clickRemoveButton(removeButton, clickedItemText) {
 
 function deleteFilterElement(clickedItemText) {
 
-  for (let element of filterItemsContainer.children) {
-    if (element.textContent == clickedItemText) {
+  for (let element of filterItemsContainer.children)
+    if (element.textContent == clickedItemText)
       filterItemsContainer.removeChild(element);
-    }
-  }
 
 }
 
@@ -255,9 +252,8 @@ function reverseFiltering() {
 
 // Make all items appear
 function resetFiltering() {
-  for (let job of hiddenJob) {
+  for (let job of hiddenJob)
     showItem(job);
-  }
 }
 
 
@@ -303,11 +299,9 @@ function manageBorder() {
 
   let smallest = [...appearJob][0];
 
-  for (let job of appearJob) {
-    if (Number.parseInt(job.dataset.id) < Number.parseInt(smallest.dataset.id)) {
+  for (let job of appearJob)
+    if (Number.parseInt(job.dataset.id) < Number.parseInt(smallest.dataset.id))
       smallest = job;
-    }
-  }
 
   insertBorder(smallest);
 
@@ -324,9 +318,8 @@ function insertBorder(element) {
 
 
 function removeBorder(elements) {
-  for(let job of elements) {
+  for(let job of elements)
     job.classList.remove("js-border");
-  }
 }
 
 
@@ -352,7 +345,6 @@ clearButton.addEventListener("click", () => {
 
 
 function clearFilterArea() {
-  for (let element of Array.from(filterItemsContainer.children)) {
+  for (let element of Array.from(filterItemsContainer.children))
     filterItemsContainer.removeChild(element);
-  }
 }

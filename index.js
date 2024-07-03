@@ -1,3 +1,5 @@
+
+//! use const when possible
 let main = document.getElementsByTagName("main")[0];
 
 let filterContainer = document.querySelector(".filter");
@@ -14,6 +16,7 @@ let jobTitles = [];
 function getData() {
   let requestUrl = "./data.json"
 
+  //! replace this to fetch, and then maybe to async/await to partcitce
   let response = new Promise(resolve => {
     let request = new XMLHttpRequest()
     

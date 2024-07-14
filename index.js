@@ -172,12 +172,9 @@ function showFilterArea() {
 function addFilterItems(element, clickedItemText) {
   
   // if the clicked element exists in filter area, stop function
-  for (let items of filterItemsContainer.children) {
-
+  for (let items of filterItemsContainer.children)
     if (items.textContent == clickedItemText)
       return;
-
-  }
   
   let clone = element.cloneNode(true);
 
@@ -202,7 +199,7 @@ function insertRemoveButton(element, clickedItemText) {
 function clickRemoveButton(removeButton, clickedItemText) {
   removeButton.addEventListener("click", () => {
 
-    for (let job of appearJob)
+    for (const job of appearJob)
       hideItem(job);
 
     deleteFilterElement(clickedItemText);
@@ -216,7 +213,7 @@ function clickRemoveButton(removeButton, clickedItemText) {
 
 function deleteFilterElement(clickedItemText) {
 
-  for (let element of filterItemsContainer.children)
+  for (const element of filterItemsContainer.children)
     if (element.textContent == clickedItemText)
       filterItemsContainer.removeChild(element);
 
@@ -255,7 +252,7 @@ function reverseFiltering() {
 
 // Make all items appear
 function resetFiltering() {
-  for (let job of hiddenJob)
+  for (const job of hiddenJob)
     showItem(job);
 }
 
@@ -302,7 +299,7 @@ function manageBorder() {
 
   let smallest = [...appearJob][0];
 
-  for (let job of appearJob)
+  for (const job of appearJob)
     if (Number.parseInt(job.dataset.id) < Number.parseInt(smallest.dataset.id))
       smallest = job;
 
@@ -321,7 +318,7 @@ function insertBorder(element) {
 
 
 function removeBorder(elements) {
-  for(let job of elements)
+  for(const job of elements)
     job.classList.remove("js-border");
 }
 
@@ -348,6 +345,6 @@ clearButton.addEventListener("click", () => {
 
 
 function clearFilterArea() {
-  for (let element of Array.from(filterItemsContainer.children))
+  for (const element of Array.from(filterItemsContainer.children))
     filterItemsContainer.removeChild(element);
 }
